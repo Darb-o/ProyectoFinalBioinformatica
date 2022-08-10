@@ -1,0 +1,58 @@
+<app-alerta [secuencia1]="secuencia1.secuencia" (retorno)="validerCampo($event)" ></app-alerta>
+
+<div class="row m-3"> 
+    <div class="col-md-6 col-sm-12">
+        <h4 class="text-center">Configuracion del alineamiento</h4>
+        <hr>
+        <div class="row">
+            <h5>Comparar con la base</h5>
+            <hr>
+            <div class="col-sm-6 text-center">
+                <div class="field-radiobutton">
+                    <p-radioButton name="local" value="local" [(ngModel)]="tipoAlineamiento" inputId="local"></p-radioButton>
+                    <label for="local" class="ms-2">Alineamiento Local</label>
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div class="field-radiobutton">
+                    <p-radioButton name="global" value="global" [(ngModel)]="tipoAlineamiento" inputId="global"></p-radioButton>
+                    <label for="global" class="ms-2">Alineamiento Global</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-12">
+            <hr>
+            <h5>Comparar con una secuencia</h5>
+            <p-dropdown [options]="organismos" [(ngModel)]="selectedOrganismo" placeholder="Seleccione una secuencia" optionLabel="nombre" [showClear]="true"></p-dropdown>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <h4 class="text-center">Digita tu secuencia</h4>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" #evento1 (click)="boton1(evento1.checked) ">
+            <label class="form-check-label" for="flexSwitchCheckDefault">{{secuencia1.texto}}</label>
+        </div>
+        <div class="form-floating mt-2" *ngIf="!secuencia1.checado">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" [(ngModel)]="secuencia1.secuencia " name="secuencia1"></textarea>
+            <label for="floatingTextarea">Escribe una secuencia valida</label>
+        </div>
+        <div class="mt-2" *ngIf="secuencia1.checado">
+            <input class="form-control" type="file" id="formFile" (change)="archivosec1($event)">
+        </div>
+    </div>
+    
+    
+</div>
+<h5>{{bandera}}</h5>
+<pre>{{selectedOrganismo|json}}</pre>
+<pre>{{secuencia1|json}}</pre>
+
+
+ <!-- <div class="row mt-2">
+    <div class="col-md-6 col-sm-12">
+        <app-slocal [secuencia1] = "secuencia1.secuencia" [secuencia2]="secuencia2.secuencia"></app-slocal>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <app-sglobal [secuencia1] = "secuencia1.secuencia" [secuencia2]="secuencia2.secuencia" [org1]="secuencia1.organismo" [org2]="secuencia2.organismo"></app-sglobal>
+    </div>
+</div> -->

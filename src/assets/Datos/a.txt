@@ -1,0 +1,26 @@
+
+PA -> Persea Americana
+GMCMC -> Garcinia Mangostana Cultivar Manggis Chlroplast
+MPV -> Musa x paradisiaca voucher
+SUV -> Selenicereus undatus voucher
+LCM -> Lens Culinaris Microsatellite
+LE -> Lycopersicon Esculentum
+PS -> Pisum Sativum
+LS -> Lactuca Sativa
+SO -> Spinacia Oleracea
+FACFBC -> Fragaria X Ananassa Cultivar Florida Brilliance Clone
+PECA -> Passiflora Edulis Clathrin Adaptor
+PT -> Passiflora Tarminiana
+CII -> Citrus Sinensis Isolate
+AD -> Actinidia Deliciosa
+CPC -> Carica Papaya Caricain
+CL -> Citrus Limon
+PVC -> Phaseolus Vulgaris Cultivar
+CS -> Cucumis Sativus
+MI -> Mangifera Indica
+AX -> Arracacia Xanthorrhiza
+AC -> Allium Cepa
+ZM -> Zea Mays
+RUI -> Rubus Ulmifolius Isolate
+ACG -> Ananas Comosus Glyceraldehyde
+DCC -> Daucus Carota Cultivar

@@ -1,0 +1,14 @@
+
+
+<div class="row m-4">
+    <div class="col-sm-6">
+        <p-autoComplete [(ngModel)]="termino" [showEmptyMessage]="true" [suggestions]="filteredOrganismos" (completeMethod)="filterOrg($event)" [field]="mostrar"></p-autoComplete>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 mt-3">
+        <pre>{{termino | json}}</pre>
+    </div>
+</div>
+
+
