@@ -17,7 +17,7 @@ export class AlineamientoComponent {
   //Array de organismos de la base
   organismos: Organismo[] = [];
   //Organismo ingresado por el usuario
-  organismoSeleccionado: Organismo = {_id:"",identificador:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};;
+  organismoSeleccionado: Organismo = {_id:"",identificador:"",encabezado:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};;
   //Tipo de carga de secuencia
   opcionCarga: tipo[] = [
     { tipo: "Manual"},{ tipo: "Archivo"}
@@ -53,7 +53,6 @@ export class AlineamientoComponent {
     this.listadoService.getOrganismos()
       .subscribe( resp => {
         this.organismos = resp.organismos;
-        console.log(this.organismos);
       });
   } 
 
@@ -61,7 +60,7 @@ export class AlineamientoComponent {
   inputSecuenciaIngresada(evento:any){
     const valor : string = evento.value;
     if(valor){
-      this.organismoSeleccionado = {_id:"",identificador:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};
+      this.organismoSeleccionado = {_id:"",identificador:"",encabezado:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};
       this.organismoSeleccionado.secuencia = valor;
     }
     if(this.opcionAlineamientoSeleccionada?.tipo === "Alineamiento Local"){
@@ -116,7 +115,7 @@ export class AlineamientoComponent {
       this.contieneErrores = true;
       return
     }
-    this.organismoSeleccionado = {_id:"",identificador:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};
+    this.organismoSeleccionado = {_id:"",identificador:"",encabezado:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};
     this.organismoSeleccionado.secuencia = secuencia;
     this.organismoSeleccionado.nombrec = nombrec!.toString();
     this.rangoValoresIngresada = [0, secuencia.length];
@@ -125,7 +124,7 @@ export class AlineamientoComponent {
   //Cambios del select manual o archivo
   cambiosIngresoSecuencia(){
     this.contieneErrores = false;
-    this.organismoSeleccionado = {_id:"",identificador:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};
+    this.organismoSeleccionado = {_id:"",identificador:"",encabezado:"",nombre:"",nombrec:"",descripcion:"",secuencia:"",imagen:"", __v:0,};
     this.rangoValoresIngresada = [0, this.organismoSeleccionado.secuencia.length];
   }
  

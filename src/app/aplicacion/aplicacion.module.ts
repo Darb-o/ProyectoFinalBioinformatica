@@ -13,6 +13,7 @@ import { GlobalComponent } from './components/global/global.component';
 import { NeedlemanComponent } from './components/needleman/needleman.component';
 import { DotplotComponent } from './components/dotplot/dotplot.component';
 import { VistaAlineamientosComponent } from './components/vista-alineamientos/vista-alineamientos.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { VistaAlineamientosComponent } from './components/vista-alineamientos/vi
     CommonModule,
     FormsModule,
     AplicacionRoutingModule,
-    PrimeNgModule
+    PrimeNgModule,
+    NgChartsModule
   ]
 })
 export class AplicacionModule { }

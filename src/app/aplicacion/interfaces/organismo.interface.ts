@@ -5,6 +5,7 @@ export interface OrganismoRespuesta {
 export interface Organismo {
     _id:           string;
     identificador: string;
+    encabezado:    string;
     nombre:        string;
     nombrec:       string;
     descripcion:   string;

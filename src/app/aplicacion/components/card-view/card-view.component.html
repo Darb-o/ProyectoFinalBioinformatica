@@ -1,15 +1,47 @@
 <div class="row"> 
-    <div class="col-md-4 col-sm-12" *ngFor="let organismo of organismos" >
-        <p-card  [header]="organismo.nombre" [subheader]="organismo.nombrec" [style]="{width: '360px'}" styleClass="p-card-shadow">
+    <div class="col-md-3 col-sm-12" *ngFor="let organismo of organismos; let i = index" >
+        <p-card  [header]="organismo.nombre" [subheader]="organismo.nombrec"  styleClass="p-card-shadow">
             <ng-template pTemplate="header">
-                <img alt="Card" [src]="organismo.imagen" height="250">
+                <img alt="Card" [src]="organismo.imagen" height="200" width="200">
             </ng-template>
-            <p>{{organismo.descripcion}}</p>
             <ng-template pTemplate="footer">
-                <button pButton pRipple type="button" label="Ver más" class="p-button-rounded" icon="pi pi-search" iconPos="right"></button>
+                <button pButton pRipple type="button" label="Ver más" (click)="mostrarOrganismo(i)" class="p-button-rounded" icon="pi pi-search" iconPos="right"></button>
             </ng-template>
         </p-card>
     </div>  
+</div>
+
+<div *ngIf="organismoSeleccionado">
+    <p-dialog [header]="organismoSeleccionado.nombrec" [(visible)]="displayModal" [modal]="true" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+        [draggable]="false" [resizable]="false">
+        <div class="row">
+            <div class="col-12">
+                <h6>Encabezado</h6>
+                <p>{{organismoSeleccionado.encabezado}}</p>
+            </div> 
+            <hr class="mt-2">       
+            <div class="col-12">
+                <h6>Secuencia</h6>
+                <p>{{organismoSeleccionado.secuencia}}</p>
+            </div>
+            <hr class="mt-2">
+            <div class="col-12">
+                <h6>Descripcion</h6>
+                <p>{{organismoSeleccionado.descripcion}}</p>
+            </div>
+            <hr class="mt-2">
+            <div class="col-12">
+                <span><h6>Longitud: </h6><p>{{organismoSeleccionado.secuencia.length}}</p></span>                   
+            </div>
+            <hr class="mt-2">
+            <div class="col-12 text-center">
+                <img [src]="organismoSeleccionado.imagen" height="250">
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
 </div>
 
 

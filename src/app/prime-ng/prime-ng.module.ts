@@ -21,6 +21,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {InputTextModule} from 'primeng/inputtext';
 import {SliderModule} from 'primeng/slider';
+import {DialogModule} from 'primeng/dialog';;
 
 @NgModule({
   exports: [
@@ -43,7 +44,8 @@ import {SliderModule} from 'primeng/slider';
     ToggleButtonModule,
     KeyFilterModule,
     InputTextModule,
-    SliderModule
+    SliderModule,
+    DialogModule
   ],
   imports: [
     CommonModule

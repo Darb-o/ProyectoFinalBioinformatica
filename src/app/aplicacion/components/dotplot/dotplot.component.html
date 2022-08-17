@@ -1,1 +1,13 @@
-<p>dotplot works!</p>
+<div class="row" *ngIf="secuenciaI && secuenciaB">
+    <div class="col" *ngIf="secuenciaI.secuencia.length>0 && secuenciaB.secuencia.length>0">
+        <div>
+            <div style="display: block">
+                <canvas baseChart
+                  [data]="scatterChartData"
+                  [options]="scatterChartOptions"
+                  [type]="scatterChartType">
+                </canvas>
+              </div>
+        </div>
+    </div>
+</div>
