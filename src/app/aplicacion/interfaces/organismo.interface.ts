@@ -8,7 +8,6 @@ export interface Organismo {
     nombre:        string;
     nombrec:       string;
     descripcion:   string;
-    longitud:      number;
     secuencia:     string;
     imagen:        string;
     __v:           number;
@@ -22,4 +21,12 @@ export interface vistaResultados{
     cadena: string;
     puntuacion: number;
     porcentaje?: number;
+    cadenaBase: string;
+    cadenaIngresada: string;
+}
+
+export interface variablesNeedleman {
+    coincidencia: number;
+    noCoincidencia: number;
+    gap: number;
 }

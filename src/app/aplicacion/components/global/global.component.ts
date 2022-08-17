@@ -78,12 +78,16 @@ export class GlobalComponent implements OnInit,OnChanges {
           objeto = {
             cadena:secuenciaResultado,
             puntuacion,
-            porcentaje
+            porcentaje,
+            cadenaBase:"",
+            cadenaIngresada: ""
           }   
         }else{
           objeto = {
             cadena:secuenciaResultado,
-            puntuacion
+            puntuacion,
+            cadenaBase:"",
+            cadenaIngresada: ""
           }
         }
         this.arrayResultados.push(objeto);
@@ -122,12 +126,16 @@ export class GlobalComponent implements OnInit,OnChanges {
           objeto = {
             cadena:secuenciaResultado,
             puntuacion,
-            porcentaje
+            porcentaje,
+            cadenaBase:"",
+            cadenaIngresada: ""
           }   
         }else{
           objeto = {
             cadena:secuenciaResultado,
-            puntuacion
+            puntuacion,
+            cadenaBase:"",
+            cadenaIngresada: ""
           }
         }
         this.arrayResultados.push(objeto);

@@ -1,1 +1,77 @@
-<p>needleman works!</p>
+<div *ngIf="valoresNeedleman">
+    <div *ngIf="secuenciaIngresada.secuencia.length>1">
+        <div class="col-12" *ngIf="!banderaComparacion">
+            <div *ngIf="organismoSeleccionado">
+                <span class="badge fs-6 p-2" id="fondoInformacion">
+                    <b> <i class="pi pi-angle-double-right"></i> Nombre secuencia: </b> {{organismoSeleccionado.nombrec}} ,
+                    <b> <i class="pi pi-chart-bar"></i> Puntuacion: </b> {{arrayResultados[0].puntuacion}} 
+                </span>
+            
+                <ul class="letras-lista">
+                    <li *ngFor="let l of secuenciaIngresadaModi.split(''); let y = index" class="text-center">
+                        {{secuenciaIngresadaModi[y]}}
+                    </li>
+                </ul>
+            
+                <div *ngFor="let resultado of arrayResultados; let i = index">
+                    <ul class="letras-lista">
+                        <li *ngFor="let letra of resultado.cadena.split(''); let j = index" class="text-center">
+                            {{letra}}
+                        </li>
+                    </ul>
+                </div>
+            
+                <div *ngFor="let resultado of arrayResultados; let i = index">
+                    <ul class="letras-lista">
+                        <li *ngFor="let letra of resultado.cadena.split(''); let j = index" class="text-center">
+                            <div id="fondoComparacion" *ngIf="letra === '|'; else otro">
+                                {{resultado.cadenaBase[j]}}
+                            </div>
+                            <ng-template #otro>
+                                {{resultado.cadenaBase[j]}}
+                            </ng-template>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    
+        <div class="col-12" *ngIf="banderaComparacion">
+            <!-- secuencia ingresada -->
+            
+            <div *ngFor="let resultado of arrayResultados; let i = index">
+        
+                <span class="badge fs-6 p-2" id="fondoInformacion">
+                    <b> <i class="pi pi-angle-double-right"></i> Organismo: </b> {{secuenciasBase[i].nombrec}} ,
+                    <b> <i class="pi pi-chart-bar"></i> Puntuacion: </b> {{resultado.puntuacion}} 
+                </span>
+        
+                <ul class="letras-lista">
+                    <li *ngFor="let l of arrayResultados[i].cadenaIngresada.split(''); let y = index" class="text-center">
+                        {{l}}
+                    </li>
+                </ul>
+        
+                <ul class="letras-lista">
+                    <li *ngFor="let letra of resultado.cadena.split(''); let j = index" class="text-center">
+                        {{letra}}
+                    </li>
+                </ul>
+        
+                <ul class="letras-lista">
+                    <li *ngFor="let letra of resultado.cadena.split(''); let j = index" class="text-center">
+                        <div id="fondoComparacion" *ngIf="letra === '|'; else otro">
+                            {{resultado.cadenaBase[j]}}
+                        </div>
+                        <ng-template #otro>
+                            {{resultado.cadenaBase[j]}}
+                        </ng-template>
+                    </li>
+                </ul>
+                <br>
+                
+            </div>
+        </div>
+    </div>
+</div>

@@ -81,12 +81,16 @@ export class LocalComponent implements OnInit, OnChanges{
           objeto = {
             cadena:secuenciaResultado,
             puntuacion,
-            porcentaje
+            porcentaje,
+            cadenaBase: secuenciaSeleccionado,
+            cadenaIngresada: ""
           }   
         }else{
           objeto = {
             cadena:secuenciaResultado,
-            puntuacion
+            puntuacion,
+            cadenaBase: secuenciaSeleccionado,
+            cadenaIngresada: ""
           }
         }
         this.arrayResultados.push(objeto);
@@ -94,7 +98,7 @@ export class LocalComponent implements OnInit, OnChanges{
     }else{
       for( let i = 0; i < this.secuenciasBase.length ; i++ ){
         longitudSeleccionado = this.rangoValoresBase[1] - this.rangoValoresBase[0];
-        secuenciaSeleccionado = this.organismoSeleccionado.secuencia.slice(this.rangoValoresBase[0],this.rangoValoresBase[0]+60);
+        secuenciaSeleccionado = this.secuenciasBase[i].secuencia.slice(this.rangoValoresBase[0],this.rangoValoresBase[1]);
         if( longitudSeleccionado > 60 ){
           secuenciaSeleccionado = secuenciaSeleccionado.slice(0,60);
           longitudSeleccionado = secuenciaSeleccionado.length;
@@ -125,12 +129,16 @@ export class LocalComponent implements OnInit, OnChanges{
           objeto = {
             cadena:secuenciaResultado,
             puntuacion,
-            porcentaje
+            porcentaje,
+            cadenaBase: secuenciaSeleccionado,
+            cadenaIngresada: ""
           }   
         }else{
           objeto = {
             cadena:secuenciaResultado,
-            puntuacion
+            puntuacion,
+            cadenaBase: secuenciaSeleccionado,
+            cadenaIngresada: ""
           }
         }
         this.arrayResultados.push(objeto);

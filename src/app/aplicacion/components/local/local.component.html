@@ -26,10 +26,10 @@
             <ul class="letras-lista">
                 <li *ngFor="let letra of resultado.cadena.split(''); let j = index" class="text-center">
                     <div id="fondoComparacion" *ngIf="letra === '|'; else otro">
-                        {{secuenciasBase[i].secuencia[j]}}
+                        {{resultado.cadenaBase[j]}}
                     </div>
                     <ng-template #otro>
-                        {{secuenciasBase[i].secuencia[j]}}
+                        {{resultado.cadenaBase[j]}}
                     </ng-template>
                 </li>
             </ul>
@@ -64,10 +64,10 @@
                 <ul class="letras-lista">
                     <li *ngFor="let letra of resultado.cadena.split(''); let j = index" class="text-center">
                         <div id="fondoComparacion" *ngIf="letra === '|'; else otro">
-                            {{organismoSeleccionado.secuencia[j]}}
+                            {{resultado.cadenaBase[j]}}
                         </div>
                         <ng-template #otro>
-                            {{organismoSeleccionado.secuencia[j]}}
+                            {{resultado.cadenaBase[j]}}
                         </ng-template>
                     </li>
                 </ul>

@@ -14,7 +14,7 @@
                 </div>            
             </div>
             <i class="p-toolbar-separator pi pi-bars mr-2" style="vertical-align: middle"></i>
-            <p-toggleButton class="mx-1" [(ngModel)]="opcionBase" onLabel="Con base" offLabel="Con base" offIcon="pi pi-times" onIcon="pi pi-check" [style]="{'width': '10em'}"></p-toggleButton>
+            <p-toggleButton class="mx-1" [(ngModel)]="opcionBase" onLabel="Base" offLabel="Base" offIcon="pi pi-times"  onIcon="pi-check" [style]="{'width': '10em'}" ></p-toggleButton>
             <p-dropdown [disabled]="opcionBase" [options]="organismos" [(ngModel)]="orgSeleccionadoBase" placeholder="Selecciona organismo" optionLabel="nombre" [showClear]="true"></p-dropdown>
             <i class="p-toolbar-separator pi pi-bars mr-2" style="vertical-align: middle"></i>
             <p-dropdown (onChange)="cambiosTipoAlineamiento()" [options]="opcionAlineamiento" [(ngModel)]="opcionAlineamientoSeleccionada" placeholder="Selecciona alineamiento" optionLabel="tipo" [showClear]="true"></p-dropdown>
@@ -53,22 +53,22 @@
 <div *ngIf="opcionAlineamientoSeleccionada" class="mx-5">
     <div class="mx-5">
         <div class="mx-5">
-            <div  *ngIf="opcionAlineamientoSeleccionada.tipo === 'Needleman and Wunsch'" class="row mx-5 mt-3">
+            <div  *ngIf="opcionAlineamientoSeleccionada.tipo === 'Needleman and Wunsch'" class="row mx-5 mt-4">
                 <div class="col-md-4">
                     <span class="p-float-label">
-                        <input class="mx-2" id="inputtext" type="text" pInputText pKeyFilter="int">
-                        <label for="inputtext">Costo misma letra</label>
+                        <input type="number" pInputText [(ngModel)]="valoresNeedleman.coincidencia" (input)="inputsNeedleman()">
+                        <label for="inputtext">Coincidencia</label>
                     </span> 
                 </div>
                 <div class="col-md-4">
                     <span class="p-float-label">
-                        <input class="mx-2" id="inputtext" type="text" pInputText pKeyFilter="int">
-                        <label for="inputtext">Costo no misma letra</label>
+                        <input type="number" pInputText [(ngModel)]="valoresNeedleman.noCoincidencia" (input)="inputsNeedleman()">
+                        <label for="inputtext">No coincidencia</label>
                     </span>
                 </div>
                 <div class="col-md-4">
                     <span class="p-float-label">
-                        <input class="mx-2" id="inputtext" type="text" pInputText pKeyFilter="int">
+                        <input type="number" pInputText [(ngModel)]="valoresNeedleman.gap" (input)="inputsNeedleman()">
                         <label for="inputtext">Costo gap</label>
                     </span> 
                 </div>
@@ -80,7 +80,7 @@
 <!-- Diferentes vistas -->
 <div *ngIf="opcionAlineamientoSeleccionada" class="mt-3">
     <div *ngIf="opcionAlineamientoSeleccionada.tipo === 'Needleman and Wunsch'">
-        <app-needleman></app-needleman>
+        <app-needleman [cambio]="cambio" [valoresNeedleman]="valoresNeedleman" [contieneErrores]="contieneErrores" [banderaComparacion]="opcionBase" [secuenciaIngresada]="organismoSeleccionado" [organismoSeleccionado]="orgSeleccionadoBase" [secuenciasBase]="organismos"></app-needleman>
     </div>
     <div *ngIf="opcionAlineamientoSeleccionada.tipo === 'Alineamiento Global'">
         <app-global [contieneErrores]="contieneErrores" [banderaComparacion]="opcionBase" [secuenciaIngresada]="organismoSeleccionado" [organismoSeleccionado]="orgSeleccionadoBase" [secuenciasBase]="organismos"></app-global>
@@ -92,9 +92,3 @@
         <app-dotplot></app-dotplot>
     </div>
 </div>
-
-<pre>{{rangoValoresBase|json}}</pre>
-<pre>{{rangoValoresIngresada|json}}</pre>
-
-
- 
