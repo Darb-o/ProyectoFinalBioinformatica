@@ -1,58 +1,100 @@
-<app-alerta [secuencia1]="secuencia1.secuencia" (retorno)="validerCampo($event)" ></app-alerta>
-
-<div class="row m-3"> 
-    <div class="col-md-6 col-sm-12">
-        <h4 class="text-center">Configuracion del alineamiento</h4>
-        <hr>
-        <div class="row">
-            <h5>Comparar con la base</h5>
-            <hr>
-            <div class="col-sm-6 text-center">
-                <div class="field-radiobutton">
-                    <p-radioButton name="local" value="local" [(ngModel)]="tipoAlineamiento" inputId="local"></p-radioButton>
-                    <label for="local" class="ms-2">Alineamiento Local</label>
-                </div>
+<div class="mt-2">
+    <p-toolbar >
+        <div class="p-toolbar-group-left">
+            <!-- <input class="form-control" type="file" accept=".txt" (change)="onUpload($event)"> -->
+            <p-dropdown [options]="opcionCarga" [(ngModel)]="opcionCargaSeleccionada" placeholder="Metodo secuencia" optionLabel="tipo" [showClear]="true" (onChange)="cambiosIngresoSecuencia()"></p-dropdown>
+            <div *ngIf="opcionCargaSeleccionada">
+                <div  *ngIf="opcionCargaSeleccionada.tipo === 'Manual'">
+                    <input (input)="inputSecuenciaIngresada($event.target)" class="mx-1" type="text" pInputText [pKeyFilter]="regexSecuencia" placeholder="Digite secuencia">
+                </div>            
             </div>
-            <div class="col-sm-6 text-center">
-                <div class="field-radiobutton">
-                    <p-radioButton name="global" value="global" [(ngModel)]="tipoAlineamiento" inputId="global"></p-radioButton>
-                    <label for="global" class="ms-2">Alineamiento Global</label>
-                </div>
+            <div *ngIf="opcionCargaSeleccionada">
+                <div  *ngIf="opcionCargaSeleccionada.tipo === 'Archivo'">
+                    <input class="form-control mx-1" type="file" accept=".fasta" (change)="cargaArchivo($event)">
+                </div>            
             </div>
+            <i class="p-toolbar-separator pi pi-bars mr-2" style="vertical-align: middle"></i>
+            <p-toggleButton class="mx-1" [(ngModel)]="opcionBase" onLabel="Con base" offLabel="Con base" offIcon="pi pi-times" onIcon="pi pi-check" [style]="{'width': '10em'}"></p-toggleButton>
+            <p-dropdown [disabled]="opcionBase" [options]="organismos" [(ngModel)]="orgSeleccionadoBase" placeholder="Selecciona organismo" optionLabel="nombre" [showClear]="true"></p-dropdown>
+            <i class="p-toolbar-separator pi pi-bars mr-2" style="vertical-align: middle"></i>
+            <p-dropdown (onChange)="cambiosTipoAlineamiento()" [options]="opcionAlineamiento" [(ngModel)]="opcionAlineamientoSeleccionada" placeholder="Selecciona alineamiento" optionLabel="tipo" [showClear]="true"></p-dropdown>
+        </div>     
+        <div class="p-toolbar-group-right">
         </div>
-        <div class="col-12 col-md-12">
-            <hr>
-            <h5>Comparar con una secuencia</h5>
-            <p-dropdown [options]="organismos" [(ngModel)]="selectedOrganismo" placeholder="Seleccione una secuencia" optionLabel="nombre" [showClear]="true"></p-dropdown>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <h4 class="text-center">Digita tu secuencia</h4>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" #evento1 (click)="boton1(evento1.checked) ">
-            <label class="form-check-label" for="flexSwitchCheckDefault">{{secuencia1.texto}}</label>
-        </div>
-        <div class="form-floating mt-2" *ngIf="!secuencia1.checado">
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" [(ngModel)]="secuencia1.secuencia " name="secuencia1"></textarea>
-            <label for="floatingTextarea">Escribe una secuencia valida</label>
-        </div>
-        <div class="mt-2" *ngIf="secuencia1.checado">
-            <input class="form-control" type="file" id="formFile" (change)="archivosec1($event)">
-        </div>
-    </div>
-    
-    
+    </p-toolbar>
 </div>
-<h5>{{bandera}}</h5>
-<pre>{{selectedOrganismo|json}}</pre>
-<pre>{{secuencia1|json}}</pre>
+
+<!-- Alerta de errores -->
+<div *ngIf="contieneErrores" class="row">
+    <div class="col-12 text-center">
+        <p-messages [(value)]="mensajeError" [enableService]="false"></p-messages>
+    </div>
+</div>
+
+<!-- Alineamiento local rangos -->
+<div *ngIf="opcionAlineamientoSeleccionada">
+    <div class="mx-5">
+        <div class="mx-5">
+            <div *ngIf="opcionAlineamientoSeleccionada.tipo === 'Alineamiento Local'" class="row mx-5 text-center">
+                <div class="col-12 mt-1">
+                    <h5 class="my-3">Base: {{rangoValoresBase[0] + ' - ' + rangoValoresBase[1]}}</h5>
+                    <p-slider [(ngModel)]="rangoValoresBase" [range]="true" [max]="maximo"></p-slider>
+                </div> 
+                <div class="col-12 mt-1">
+                    <h5 class="my-3">Ingresada: {{rangoValoresIngresada[0] + ' - ' + rangoValoresIngresada[1]}}</h5>
+                    <p-slider [(ngModel)]="rangoValoresIngresada" [range]="true" [max]="organismoSeleccionado.secuencia.length"></p-slider> 
+                </div>  
+            </div>
+        </div>
+    </div>          
+</div>  
+
+<!-- alineamiento needleman -->
+<div *ngIf="opcionAlineamientoSeleccionada" class="mx-5">
+    <div class="mx-5">
+        <div class="mx-5">
+            <div  *ngIf="opcionAlineamientoSeleccionada.tipo === 'Needleman and Wunsch'" class="row mx-5 mt-3">
+                <div class="col-md-4">
+                    <span class="p-float-label">
+                        <input class="mx-2" id="inputtext" type="text" pInputText pKeyFilter="int">
+                        <label for="inputtext">Costo misma letra</label>
+                    </span> 
+                </div>
+                <div class="col-md-4">
+                    <span class="p-float-label">
+                        <input class="mx-2" id="inputtext" type="text" pInputText pKeyFilter="int">
+                        <label for="inputtext">Costo no misma letra</label>
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <span class="p-float-label">
+                        <input class="mx-2" id="inputtext" type="text" pInputText pKeyFilter="int">
+                        <label for="inputtext">Costo gap</label>
+                    </span> 
+                </div>
+            </div> 
+        </div> 
+    </div>          
+</div> 
+
+<!-- Diferentes vistas -->
+<div *ngIf="opcionAlineamientoSeleccionada" class="mt-3">
+    <div *ngIf="opcionAlineamientoSeleccionada.tipo === 'Needleman and Wunsch'">
+        <app-needleman></app-needleman>
+    </div>
+    <div *ngIf="opcionAlineamientoSeleccionada.tipo === 'Alineamiento Global'">
+        <app-global [contieneErrores]="contieneErrores" [banderaComparacion]="opcionBase" [secuenciaIngresada]="organismoSeleccionado" [organismoSeleccionado]="orgSeleccionadoBase" [secuenciasBase]="organismos"></app-global>
+    </div>
+    <div *ngIf="opcionAlineamientoSeleccionada.tipo === 'Alineamiento Local'">
+        <app-local [rangoValoresBase]="rangoValoresBase" [rangoValoresIngresada]="rangoValoresIngresada" [contieneErrores]="contieneErrores" [banderaComparacion]="opcionBase" [secuenciaIngresada]="organismoSeleccionado" [organismoSeleccionado]="orgSeleccionadoBase" [secuenciasBase]="organismos"></app-local>
+    </div>
+    <div *ngIf="opcionAlineamientoSeleccionada.tipo === 'Dotplot'">
+        <app-dotplot></app-dotplot>
+    </div>
+</div>
+
+<pre>{{rangoValoresBase|json}}</pre>
+<pre>{{rangoValoresIngresada|json}}</pre>
 
 
- <!-- <div class="row mt-2">
-    <div class="col-md-6 col-sm-12">
-        <app-slocal [secuencia1] = "secuencia1.secuencia" [secuencia2]="secuencia2.secuencia"></app-slocal>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <app-sglobal [secuencia1] = "secuencia1.secuencia" [secuencia2]="secuencia2.secuencia" [org1]="secuencia1.organismo" [org2]="secuencia2.organismo"></app-sglobal>
-    </div>
-</div> -->
+ 

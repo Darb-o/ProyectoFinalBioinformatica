@@ -7,14 +7,23 @@ import { AlineamientoComponent } from './pages/alineamiento/alineamiento.compone
 
 import { FormsModule } from '@angular/forms';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
-import { AlertaComponent } from './components/alerta/alerta.component';
-
+import { CardViewComponent } from './components/card-view/card-view.component';
+import { LocalComponent } from './components/local/local.component';
+import { GlobalComponent } from './components/global/global.component';
+import { NeedlemanComponent } from './components/needleman/needleman.component';
+import { DotplotComponent } from './components/dotplot/dotplot.component';
+import { VistaAlineamientosComponent } from './components/vista-alineamientos/vista-alineamientos.component';
 
 @NgModule({
   declarations: [
     ConsultaComponent,
     AlineamientoComponent,
-    AlertaComponent
+    CardViewComponent,
+    LocalComponent,
+    GlobalComponent,
+    NeedlemanComponent,
+    DotplotComponent,
+    VistaAlineamientosComponent
   ],
   imports: [
     CommonModule,

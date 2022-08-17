@@ -13,3 +13,13 @@ export interface Organismo {
     imagen:        string;
     __v:           number;
 }
+
+export interface tipo {
+    tipo: string;
+}
+
+export interface vistaResultados{
+    cadena: string;
+    puntuacion: number;
+    porcentaje?: number;
+}

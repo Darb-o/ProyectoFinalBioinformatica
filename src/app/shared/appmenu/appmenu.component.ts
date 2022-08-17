@@ -13,11 +13,11 @@ export class AppmenuComponent implements OnInit {
 
   items: MenuItem[] = [];
 
-    ngOnInit() {
-        this.items = [
-            { label: 'Consultas', icon: 'pi pi-search', routerLink: './app/consulta'},
-            {label: 'Alineamiento', icon: 'pi pi-sitemap',  routerLink: './app/alineamiento'},
-        ];
-    }
+  ngOnInit() {
+      this.items = [
+          { label: 'Consultas', icon: 'pi pi-search', routerLink: './app/consulta'},
+          { label: 'Alineamiento', icon: 'pi pi-sitemap',  routerLink: './app/alineamiento'}
+      ];
+  }
 
 }

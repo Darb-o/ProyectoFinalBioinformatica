@@ -7,3 +7,26 @@ html, body{
 .text-layout{
     color: var(--text-color);
 }
+
+.letras-lista {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.letras-lista li {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
+#fondoInformacion{
+  background: var(--primary-color);
+  color: var(--surface-900);
+}
+
+#fondoComparacion{
+  background: #8FEAE0;
+  color: var(--surface-900);
+}
+

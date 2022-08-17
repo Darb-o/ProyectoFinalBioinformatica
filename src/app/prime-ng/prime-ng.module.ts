@@ -10,6 +10,17 @@ import {DropdownModule} from 'primeng/dropdown';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {RippleModule} from 'primeng/ripple';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {CheckboxModule} from 'primeng/checkbox';
+import {CardModule} from 'primeng/card';
+import {ToolbarModule} from 'primeng/toolbar';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import {FileUploadModule} from 'primeng/fileupload';
+import {CascadeSelectModule} from 'primeng/cascadeselect';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {InputTextModule} from 'primeng/inputtext';
+import {SliderModule} from 'primeng/slider';
 
 @NgModule({
   exports: [
@@ -21,7 +32,18 @@ import {RippleModule} from 'primeng/ripple';
     DropdownModule,
     MessagesModule,
     MessageModule,
-    RippleModule
+    RippleModule,
+    InputNumberModule,
+    CheckboxModule,
+    CardModule,
+    ToolbarModule,
+    SplitButtonModule,
+    FileUploadModule,
+    CascadeSelectModule,
+    ToggleButtonModule,
+    KeyFilterModule,
+    InputTextModule,
+    SliderModule
   ],
   imports: [
     CommonModule

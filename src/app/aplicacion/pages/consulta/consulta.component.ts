@@ -6,12 +6,17 @@ import { ListadoService } from '../../services/listado.service';
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
   styles: [
+    `
+    #div-c{
+      background-color: var(--primary-color)
+    }
+    `
   ]
 })
 export class ConsultaComponent implements OnInit {
 
   termino!: Organismo;
-  mostrar: string = "nombre"
+  mostrar: string = "nombre";
   filteredOrganismos: Organismo[] = [];
   organismos: Organismo[] = [];
 
