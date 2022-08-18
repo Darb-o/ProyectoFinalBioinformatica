@@ -46,6 +46,7 @@ export class AlineamientoComponent {
   //Needleman
   valoresNeedleman: variablesNeedleman = {coincidencia:0,noCoincidencia:0,gap:0};
   cambio: boolean = false;
+  min: number = 0;
 
   constructor(private listadoService: ListadoService){}
 

@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-4">
                     <span class="p-float-label">
-                        <input type="number" pInputText [(ngModel)]="valoresNeedleman.gap" (input)="inputsNeedleman()">
+                        <input type="number" pInputText [(ngModel)]="valoresNeedleman.gap" (input)="inputsNeedleman()" [min]="min">
                         <label for="inputtext">Costo gap</label>
                     </span> 
                 </div>

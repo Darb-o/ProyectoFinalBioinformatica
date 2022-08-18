@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartEvent, ChartType} from 'chart.js';
+import { ChartConfiguration, ChartData, ChartEvent, ChartOptions, ChartType} from 'chart.js';
 import { Organismo } from '../../interfaces/organismo.interface';
 
 interface dotplot {
@@ -21,9 +21,11 @@ export class DotplotComponent implements OnInit, OnChanges {
   secuenciaBas : string = "";
   puntos: dotplot[] = [];
 
-  scatterChartOptions: ChartConfiguration['options'];
+  scatterChartOptions: ChartOptions = {
+    responsive: true
+  };
   scatterChartType: ChartType = 'scatter';
-  scatterChartData!: ChartData<'scatter'>;
+  scatterChartData!: ChartData;
   
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -82,13 +84,34 @@ export class DotplotComponent implements OnInit, OnChanges {
         }
       }
     }
+    let datos = [];
+    if(longSecuenciaI===longSecuenciaB){
+      for(let i = 0; i<longSecuenciaI; i++){
+        datos.push({x:i,y:i});
+      }
+    }
+    let coincidencias = 0;
+
+    for(let i = 0; i<this.puntos.length; i++){
+      if(this.puntos[i].x === this.puntos[i].y){
+        coincidencias++;
+      }
+    }
+
     this.scatterChartData = {
       datasets: [
         {
           data: this.puntos,
           label: 'Dotplot secuencias',
-          pointRadius: 6,
+          pointRadius: 5,
+          pointBackgroundColor: '#ED2852'
         },
+        {
+          data: datos, label: 'Linea', type: 'line'
+        },
+        {
+          data: [], label: `Coincidencias: ${coincidencias}` 
+        }
       ]
     };
   }
